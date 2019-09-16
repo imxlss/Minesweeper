@@ -1,0 +1,7 @@
+<div class="container" [ngClass]="{'container-show': showResult}">
+  <p>{{resultText}}</p>
+  <div class="btn-container">
+    <button class="btn again-btn" (click)="againGame()">再玩一局</button>
+    <button class="btn confirm-btn" (click)="confirm()">确定</button>
+  </div>
+</div>

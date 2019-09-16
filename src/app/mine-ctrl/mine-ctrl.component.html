@@ -1,0 +1,33 @@
+<div class="container">
+  <ul>
+    <li>
+      <span class="label"><i>⚖️</i>难度：</span> <span class="level-span" *ngIf="level === 'easy'"
+        (click)="changeLevel('medium')">⭐️</span>
+      <span class="level-span" *ngIf="level === 'medium'" (click)="changeLevel('hard')">🌙</span> <span
+        class="level-span" *ngIf="level === 'hard'" (click)="changeLevel('easy')">🌕</span>
+    </li>
+    <li>
+      <span><i>🎮</i>状态：</span> <span *ngIf="status !== 'progress'">⌛️</span> <span
+        *ngIf="status === 'progress'">⏳</span>
+    </li>
+    <li>
+      <span><i>💣</i>地雷：</span> <span>{{mineCount}}</span>
+    </li>
+    <li>
+      <span><i>⛳️</i>标记：</span> <span>{{flaggedCount}}</span>
+    </li>
+    <li class="line"></li>
+    <li>
+      <span><i>⏰</i>时间：</span> <span id="time-span">{{time}} s</span>
+    </li>
+  </ul>
+  <div class="btn-container">
+    <button *ngIf="status === 'ready'" class="btn start-btn" (click)="startGame()">开始游戏</button>
+    <button *ngIf="status === 'loss' || status === 'victory'" class="btn start-btn" (click)="restartGame()">重新开始</button>
+    <button *ngIf="status === 'progress'" class="btn pause-btn" (click)="pauseGame()">暂停</button>
+    <button *ngIf="status === 'pause'" class="btn pause-btn" (click)="continueGame()">继续</button>
+
+    <button *ngIf="status === 'progress' || status === 'pause'" class=" btn start-btn"
+      (click)="stopGame()">不玩了</button>
+  </div>
+</div>

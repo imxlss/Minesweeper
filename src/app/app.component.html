@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="mine-ctrl-wrapper">
+    <mine-ctrl [flaggedCount]="flaggedCount" (levelChange)="levelChange($event)" (statusChange)="statusChange($event)">
+    </mine-ctrl>
+  </div>
+  <mine-board [boardSize]="boardSize" [mineCount]="mineCount" [status]="status" (flaggedChange)="flaggedChange($event)">
+  </mine-board>
+</div>
+
+<mine-result></mine-result>

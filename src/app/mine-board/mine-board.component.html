@@ -1,0 +1,8 @@
+<div class="board" [ngStyle]="boardStyle" (contextmenu)="handleContextmenu()">
+  <div class="cell-row-list" *ngFor="let rowCellList of cellList">
+    <mine-cell class="cell" *ngFor="let cell of rowCellList" (openNeighbors)="openNeighbors($event)"
+      (flaggedChange)="flaggedChangeFormCell($event)" (gameOver)="gameOver($event)" [id]="cell.id"
+      [(opened)]="cell.opened" [(flagged)]="cell.flagged" [mined]="cell.mined"
+      [neighborMineCount]="cell.neighborMineCount" [status]="status"></mine-cell>
+  </div>
+</div>

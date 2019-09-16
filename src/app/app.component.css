@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  height: 95vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.mine-ctrl-wrapper {
+  margin: 0 20px;
+  align-self: center;
+}

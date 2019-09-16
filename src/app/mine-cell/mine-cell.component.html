@@ -1,0 +1,9 @@
+<div [ngClass]="{'cell': true, 'cell-opend': !flagged && opened}" (click)="openCell()" (contextmenu)="flaggedCell()">
+  <span *ngIf="!flagged && opened"
+    [ngClass]="{'cell-text': true, 'cell-text-mined': mined, 'count-1': neighborMineCount === 1, 'count-2': neighborMineCount === 2, 'count-3': neighborMineCount === 3, 'count-4': neighborMineCount === 4, 'count-5': neighborMineCount === 5, 'count-6': neighborMineCount === 6, 'count-7': neighborMineCount === 7, 'count-8': neighborMineCount === 8}">
+    {{cellText}}
+  </span>
+  <span *ngIf="flagged" [ngClass]="{'cell-text': true, 'cell-flagged': flagged}">
+    {{cellText}}
+  </span>
+</div>

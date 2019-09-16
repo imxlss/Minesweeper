@@ -1,0 +1,62 @@
+.container {
+  width: 300px;
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  background-color: #fff;
+  word-wrap: break-word;
+  position: fixed;
+  left: 50%;
+  top: -30vh;
+  transform: translateX(-50%) scale(0);
+}
+
+.container-show {
+  left: 50%;
+  top: 30vh;
+  transform: translateX(-50%) scale(1);
+  transition: all .5s ease;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2em;
+}
+
+.btn {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .045);
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .015);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  height: 32px;
+  padding: 0 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 0 10px;
+}
+
+.again-btn {
+  background-color: #1897ff;
+  border-color: #1890ff;
+}
+
+.confirm-btn {
+  background-color: #1897ff;
+  border-color: #1890ff;
+}

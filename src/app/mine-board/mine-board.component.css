@@ -1,0 +1,16 @@
+.board {
+  border: 2px solid #10345a;
+  border-radius: 4px;
+}
+
+.cell-row-list {
+  display: flex;
+}
+
+.cell-row-list:not(:first-child) {
+  border-top: 1px solid #79a6d6;
+}
+
+.cell:not(:first-child) {
+  border-left: 1px solid #79a6d6;
+}
