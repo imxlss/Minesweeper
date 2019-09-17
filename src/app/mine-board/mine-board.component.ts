@@ -201,12 +201,6 @@ export class MineBoardComponent implements OnInit {
     return mined;
   }
 
-  gameOver(gameOver: boolean) {
-    if (gameOver === true) {
-      this.showAllMine();
-    }
-  }
-
   showAllMine() {
     for (let id in this.cellListMap) {
       let cell = this.cellListMap[id];
