@@ -3,6 +3,7 @@ import { ICell } from './../core/type';
 import {
   Component,
   OnInit,
+  OnChanges,
   Input,
   SimpleChanges,
   Output,
@@ -14,11 +15,13 @@ import {
   templateUrl: './mine-board.component.html',
   styleUrls: ['./mine-board.component.css']
 })
-export class MineBoardComponent implements OnInit {
+export class MineBoardComponent implements OnInit, OnChanges {
   @Input() boardSize: number;
   @Input() mineCount: number;
 
   @Output() flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  gameWasVictoryTime: number = 0;
 
   flaggedCount: number = 0;
   cellList = [];
@@ -32,7 +35,7 @@ export class MineBoardComponent implements OnInit {
   ngOnInit() {
     this.messageService.getStatus().subscribe(status => {
       if (status === 'ready') {
-        return this.restartInit();
+        return this.init();
       }
       if (status === 'loss') {
         return this.showAllMine();
@@ -42,18 +45,15 @@ export class MineBoardComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.boardSize && !changes.boardSize.firstChange) {
-      this.restartInit();
+      this.init();
     }
   }
 
-  restartInit() {
+  // 初始化游戏
+  init() {
     this.cellList = [];
     this.cellListMap = {};
     this.flaggedCount = 0;
-    this.generateCellList();
-  }
-
-  generateCellList() {
     this.initBoard();
     this.randomlyAssignMines();
     this.calculateNeighborMineCounts();
@@ -162,7 +162,7 @@ export class MineBoardComponent implements OnInit {
     this.openCells(notOpendNeighborsList);
     return setTimeout(() => {
       this.gameWasVictory()
-    }, 0);;
+    }, 0);
   }
 
   openCells(ids: Array<string>) {
@@ -203,31 +203,30 @@ export class MineBoardComponent implements OnInit {
     this.flaggedCount += flaggedCountChange;
     this.flaggedChange.emit(isFlagged);
 
-    console.log(this.flaggedCount);
     return setTimeout(() => {
       this.gameWasVictory()
-    }, 0);;
+    }, 0);
   }
 
   openedChange() {
     return setTimeout(() => {
       this.gameWasVictory()
-    }, 0);;
+    }, 0);
   }
 
   // 检查是否成功
   gameWasVictory() {
-    if (this.flaggedCount !== this.mineCount) {
-      return;
-    }
+    if (this.flaggedCount !== this.mineCount) return;
+
     let gameResult = this.cellList.every(rowCellList => {
       return rowCellList.every((cell: ICell) => {
         return ((cell.mined && cell.flagged) || (cell.mined === false && cell.opened));
       });
     });
-    if (gameResult) {
-      return this.messageService.sendStatus('victory');
-    }
+
+    if (!gameResult) return;
+
+    return this.messageService.sendStatus('victory');
   }
 
   handleContextmenu() {
