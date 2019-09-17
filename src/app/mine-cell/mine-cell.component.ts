@@ -57,7 +57,7 @@ export class MineCellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messageService.status$.subscribe(status => {
+    this.messageService.getStatus().subscribe(status => {
       this.status = status;
     });
   }
@@ -73,7 +73,7 @@ export class MineCellComponent implements OnInit {
     this.openedChange.emit(this.opened);
 
     if (this.mined) {
-      return this.messageService.status$.next('loss');
+      return this.messageService.sendStatus('loss');
     }
 
     if (this.neighborMineCount === 0) {

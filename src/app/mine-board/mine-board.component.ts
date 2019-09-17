@@ -34,10 +34,10 @@ export class MineBoardComponent implements OnInit {
     width: `calc(${this.boardSize * 2}em + ${this.boardSize}px)`
   };
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    this.messageService.status$.subscribe(status => {
+    this.messageService.getStatus().subscribe(status => {
       if (status === 'ready') {
         this.restartInit();
       }
@@ -246,7 +246,7 @@ export class MineBoardComponent implements OnInit {
 
     console.log(gameResult);
     if (gameResult) {
-      this.messageService.status$.next('victory');
+      this.messageService.sendStatus('victory');
     }
   }
 

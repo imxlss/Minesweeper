@@ -55,7 +55,7 @@ export class MineCtrlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messageService.status$.subscribe(status => {
+    this.messageService.getStatus().subscribe(status => {
       this.status = status;
       if (this.status === 'ready') {
         return this.resetGame();
@@ -108,7 +108,7 @@ export class MineCtrlComponent implements OnInit {
   }
 
   statusNext() {
-    this.messageService.status$.next(this.status);
+    this.messageService.sendStatus(this.status);
   }
 
   startTimer() {

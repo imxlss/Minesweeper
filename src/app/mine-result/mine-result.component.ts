@@ -15,10 +15,10 @@ export class MineResultComponent implements OnInit {
   showResult: boolean = false;
   resultText: string;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    this.messageService.status$.subscribe(status => {
+    this.messageService.getStatus().subscribe(status => {
       if (['loss', 'victory'].includes(status)) {
         this.showResult = true;
         this.resultText = resultMap[status];
@@ -27,7 +27,7 @@ export class MineResultComponent implements OnInit {
   }
 
   againGame() {
-    this.messageService.status$.next('ready');
+    this.messageService.sendStatus('ready');
     this.showResult = false;
   }
 
