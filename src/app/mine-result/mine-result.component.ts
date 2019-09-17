@@ -22,13 +22,14 @@ export class MineResultComponent implements OnInit {
       if (['loss', 'victory'].includes(status)) {
         this.showResult = true;
         this.resultText = resultMap[status];
+      } else {
+        this.showResult = false;
       }
     });
   }
 
   againGame() {
     this.messageService.sendStatus('ready');
-    this.showResult = false;
   }
 
   confirm() {
