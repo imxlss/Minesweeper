@@ -45,8 +45,6 @@ export class MineBoardComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
     if (changes.boardSize && !changes.boardSize.firstChange) {
       this.restartInit();
     }
@@ -55,6 +53,7 @@ export class MineBoardComponent implements OnInit {
   restartInit() {
     this.cellList = [];
     this.cellListMap = {};
+    this.flaggedCount = 0;
     this.generateCellList();
   }
 
@@ -172,7 +171,9 @@ export class MineBoardComponent implements OnInit {
   openNeighbors(id: string) {
     let notOpendNeighborsList = this.getNotOpenedNeighbors(id);
     this.openCells(notOpendNeighborsList);
-    return this.gameWasVictory();
+    return setTimeout(() => {
+      this.gameWasVictory()
+    }, 0);;
   }
 
   openCells(ids: Array<string>) {
@@ -202,7 +203,6 @@ export class MineBoardComponent implements OnInit {
 
   gameOver(gameOver: boolean) {
     if (gameOver === true) {
-      console.log('game over');
       this.showAllMine();
     }
   }
@@ -211,9 +211,6 @@ export class MineBoardComponent implements OnInit {
     for (let id in this.cellListMap) {
       let cell = this.cellListMap[id];
       cell.opened = true;
-      // if (cell.mined === true && cell.flagged === false) {
-      //   cell.opened = true;
-      // };
     }
   }
 
@@ -222,31 +219,30 @@ export class MineBoardComponent implements OnInit {
     this.flaggedCount += flaggedCountChange;
     this.flaggedChange.emit(isFlagged);
 
-    return this.gameWasVictory();
+    console.log(this.flaggedCount);
+    return setTimeout(() => {
+      this.gameWasVictory()
+    }, 0);;
   }
 
   openedChange() {
-    return this.gameWasVictory();
+    return setTimeout(() => {
+      this.gameWasVictory()
+    }, 0);;
   }
 
   // 检查是否成功
   gameWasVictory() {
-    console.log('gameWasVictory');
-    console.log(this.cellList);
     if (this.flaggedCount !== this.mineCount) {
       return;
     }
     let gameResult = this.cellList.every(rowCellList => {
-      return rowCellList.every((cell: ICell, index) => {
-        return (
-          (cell.mined && cell.flagged) || (cell.mined === false && cell.opened)
-        );
+      return rowCellList.every((cell: ICell) => {
+        return ((cell.mined && cell.flagged) || (cell.mined === false && cell.opened));
       });
     });
-
-    console.log(gameResult);
     if (gameResult) {
-      this.messageService.sendStatus('victory');
+      return this.messageService.sendStatus('victory');
     }
   }
 
