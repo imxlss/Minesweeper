@@ -25,7 +25,7 @@ const MineCountLevel = {
 })
 export class MineCtrlComponent implements OnInit {
   level: LevelType = 'easy';
-  status: StatusType = 'ready';
+  status: StatusType;
   time = 0;
   timer = null;
   @Input()
@@ -60,7 +60,7 @@ export class MineCtrlComponent implements OnInit {
       if (this.status === 'ready') {
         return this.resetGame();
       }
-      if (status === 'loss') {
+      if (['loss', 'victory'].includes(status)) {
         this.pauseTimer();
       }
     });
@@ -70,6 +70,7 @@ export class MineCtrlComponent implements OnInit {
     this.status = 'progress';
     this.resetGame();
     this.startTimer();
+
     this.statusNext();
   }
 
