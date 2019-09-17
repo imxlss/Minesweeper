@@ -29,8 +29,6 @@ export class MineCellComponent implements OnInit {
   flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   openNeighbors: EventEmitter<string> = new EventEmitter<string>();
-  @Output()
-  gameOver: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   get cellText() {
     if (this.flagged) {
@@ -75,8 +73,7 @@ export class MineCellComponent implements OnInit {
     this.openedChange.emit(this.opened);
 
     if (this.mined) {
-      this.messageService.status$.next('loss');
-      return this.gameOver.emit(true);
+      return this.messageService.status$.next('loss');
     }
 
     if (this.neighborMineCount === 0) {

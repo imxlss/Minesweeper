@@ -1,5 +1,5 @@
 import { MessageService } from './../service/message.service';
-import { StatusType } from './../core/type';
+import { StatusType, ICell } from './../core/type';
 import {
   Component,
   OnInit,
@@ -8,8 +8,6 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { UtilsService } from '../service/utils.service';
-import { resource } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'mine-board',
@@ -27,7 +25,7 @@ export class MineBoardComponent implements OnInit {
   @Output()
   flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  flaggedCount: number;
+  flaggedCount: number = 0;
 
   cellList = [];
   cellListMap = {};
@@ -99,7 +97,7 @@ export class MineBoardComponent implements OnInit {
   }
 
   calculateNeighborMineCounts() {
-    let cell;
+    let cell: ICell;
     let neighborMineCount = 0;
 
     for (let row = 0; row < this.boardSize; row++) {
@@ -126,11 +124,9 @@ export class MineBoardComponent implements OnInit {
     flagged = false,
     mined = false,
     neighborMineCount = 0
-  ) {
+  ): ICell {
     return {
       id: `${row}|${column}`,
-      row,
-      column,
       opened,
       flagged,
       mined,
@@ -150,9 +146,8 @@ export class MineBoardComponent implements OnInit {
     neighbors.push(`${row + 1}|${column + 1}`);
 
     return neighbors.filter(item => {
-      let cooridinates = item.split('|');
-      let row = cooridinates[0],
-        column = cooridinates[1];
+      let [row, column] = item.split('|');
+
       return (
         row >= 0 &&
         column >= 0 &&
@@ -163,9 +158,7 @@ export class MineBoardComponent implements OnInit {
   }
 
   getNotOpenedNeighbors(id: string) {
-    let cooridinates = id.split('|');
-    let row = cooridinates[0],
-      column = cooridinates[1];
+    let [row, column] = id.split('|');
 
     let neighbors = this.getNeighbors(+row, +column);
 
@@ -178,8 +171,8 @@ export class MineBoardComponent implements OnInit {
 
   openNeighbors(id: string) {
     let notOpendNeighborsList = this.getNotOpenedNeighbors(id);
-
-    return this.openCells(notOpendNeighborsList);
+    this.openCells(notOpendNeighborsList);
+    return this.gameWasVictory();
   }
 
   openCells(ids: Array<string>) {
@@ -198,9 +191,7 @@ export class MineBoardComponent implements OnInit {
 
   isMined(id: string) {
     let mined = 0;
-    let cooridinates = id.split('|');
-    let row = cooridinates[0],
-      column = cooridinates[1];
+    let [row, column] = id.split('|');
 
     let cell = this.cellList[row][column];
     if (typeof cell !== 'undefined') {
@@ -227,31 +218,35 @@ export class MineBoardComponent implements OnInit {
   }
 
   flaggedChangeFormCell(isFlagged: boolean) {
-    let flaggedCountChange = isFlagged ? 1 : 0;
+    let flaggedCountChange = isFlagged ? 1 : -1;
     this.flaggedCount += flaggedCountChange;
-
     this.flaggedChange.emit(isFlagged);
 
-    this.gameWasVictory();
+    return this.gameWasVictory();
+  }
+
+  openedChange() {
+    return this.gameWasVictory();
   }
 
   // 检查是否成功
   gameWasVictory() {
+    console.log('gameWasVictory');
+    console.log(this.cellList);
     if (this.flaggedCount !== this.mineCount) {
       return;
     }
     let gameResult = this.cellList.every(rowCellList => {
-      return rowCellList.every(
-        cell =>
-          cell.mined && cell.flagged && (cell.mined === false && cell.opened)
-      );
+      return rowCellList.every((cell: ICell, index) => {
+        return (
+          (cell.mined && cell.flagged) || (cell.mined === false && cell.opened)
+        );
+      });
     });
 
+    console.log(gameResult);
     if (gameResult) {
-      return this.messageService.gameOver$.next({
-        gameOver: true,
-        gameResult: 'victory'
-      });
+      this.messageService.status$.next('victory');
     }
   }
 

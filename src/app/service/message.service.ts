@@ -11,8 +11,6 @@ interface IGameOver {
   providedIn: 'root'
 })
 export class MessageService {
-  gameOver$: BehaviorSubject<IGameOver> = new BehaviorSubject<IGameOver>({ gameOver: false, gameResult: 'victory' });
-
   status$:BehaviorSubject<StatusType> = new BehaviorSubject<StatusType>('ready');
 
   constructor() { }

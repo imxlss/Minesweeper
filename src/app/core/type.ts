@@ -6,3 +6,11 @@ export interface IBoardIInfo {
   boardSize: number;
   mineCount: number;
 }
+
+export interface ICell {
+  flagged: boolean;
+  id: string;
+  mined: boolean;
+  neighborMineCount: number;
+  opened: boolean;
+}

@@ -37,6 +37,9 @@ export class MineCtrlComponent implements OnInit {
     mineCount: number;
   }> = new EventEmitter<{ boardSize: number; mineCount: number }>();
 
+  @Output()
+  flaggedCountChange: EventEmitter<number> = new EventEmitter<number>();
+
   get mineCount(): number {
     return MineCountLevel[this.level].mineCount;
   }
@@ -101,6 +104,7 @@ export class MineCtrlComponent implements OnInit {
     this.pauseTimer();
     this.time = 0;
     this.flaggedCount = 0;
+    this.flaggedCountChange.emit(this.flaggedCount);
   }
 
   statusNext() {
