@@ -1,24 +1,15 @@
-import { GameResultType, StatusType } from './../core/type';
+import { StatusType } from './../core/type';
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-
-interface IGameOver {
-  gameOver: boolean;
-  gameResult: GameResultType;
-}
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  private status$ = new Subject<any>();
+  private status$ = new BehaviorSubject<StatusType>('ready');
 
   sendStatus(status: StatusType) {
     this.status$.next(status);
-  }
-
-  clearMessage() {
-    this.status$.next();
   }
 
   getStatus(): Observable<any> {
