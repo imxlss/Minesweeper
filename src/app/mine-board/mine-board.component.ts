@@ -37,7 +37,10 @@ export class MineBoardComponent implements OnInit {
   ngOnInit() {
     this.messageService.getStatus().subscribe(status => {
       if (status === 'ready') {
-        this.restartInit();
+        return this.restartInit();
+      }
+      if (status === 'loss') {
+        return this.showAllMine();
       }
     });
   }
@@ -114,14 +117,7 @@ export class MineBoardComponent implements OnInit {
   }
 
   // 单元格工厂
-  cellFactory(
-    row: number,
-    column: number,
-    opened = false,
-    flagged = false,
-    mined = false,
-    neighborMineCount = 0
-  ): ICell {
+  cellFactory(row: number, column: number, opened = false, flagged = false, mined = false, neighborMineCount = 0): ICell {
     return {
       id: `${row}|${column}`,
       opened,
@@ -200,9 +196,10 @@ export class MineBoardComponent implements OnInit {
   }
 
   showAllMine() {
-    for (let id in this.cellListMap) {
-      let cell = this.cellListMap[id];
-      cell.opened = true;
+    for (let i = 0; i < this.boardSize; i++) {
+      for (let j = 0; j < this.boardSize; j++) {
+        this.cellList[i][j].opend = true;
+      }
     }
   }
 
