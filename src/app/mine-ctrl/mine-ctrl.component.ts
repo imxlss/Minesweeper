@@ -24,21 +24,19 @@ const MineCountLevel = {
   styleUrls: ['./mine-ctrl.component.css']
 })
 export class MineCtrlComponent implements OnInit {
-  level: LevelType = 'easy';
-  status: StatusType;
-  time = 0;
-  timer = null;
-  @Input()
-  flaggedCount = 0;
+  @Input() flaggedCount = 0;
 
-  @Output()
-  levelChange: EventEmitter<{
+  @Output() levelChange: EventEmitter<{
     boardSize: number;
     mineCount: number;
   }> = new EventEmitter<{ boardSize: number; mineCount: number }>();
+  @Output() flaggedCountChange: EventEmitter<number> = new EventEmitter<number>();
 
-  @Output()
-  flaggedCountChange: EventEmitter<number> = new EventEmitter<number>();
+  level: LevelType = 'easy';
+  status: StatusType;
+  time = 0;
+
+  private _timer = null;
 
   get mineCount(): number {
     return MineCountLevel[this.level].mineCount;
@@ -113,14 +111,14 @@ export class MineCtrlComponent implements OnInit {
   }
 
   startTimer() {
-    this.timer = setInterval(() => {
+    this._timer = setInterval(() => {
       this.time += 1;
     }, 1000);
   }
 
   pauseTimer() {
-    clearInterval(this.timer);
-    this.timer = null;
+    clearInterval(this._timer);
+    this._timer = null;
   }
 
   changeLevel(level: LevelType) {

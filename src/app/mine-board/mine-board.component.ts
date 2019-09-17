@@ -1,5 +1,5 @@
 import { MessageService } from './../service/message.service';
-import { StatusType, ICell } from './../core/type';
+import { ICell } from './../core/type';
 import {
   Component,
   OnInit,
@@ -15,19 +15,14 @@ import {
   styleUrls: ['./mine-board.component.css']
 })
 export class MineBoardComponent implements OnInit {
-  @Input()
-  boardSize: number;
-  @Input()
-  mineCount: number;
+  @Input() boardSize: number;
+  @Input() mineCount: number;
 
-  @Output()
-  flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   flaggedCount: number = 0;
-
   cellList = [];
   cellListMap = {};
-
   boardStyle = {
     width: `calc(${this.boardSize * 2}em + ${this.boardSize}px)`
   };

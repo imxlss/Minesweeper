@@ -9,25 +9,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./mine-cell.component.css']
 })
 export class MineCellComponent implements OnInit {
-  @Input()
-  id: string;
-  @Input()
-  opened: boolean = false;
-  @Input()
-  flagged: boolean = false;
-  @Input()
-  mined: boolean = false;
-  @Input()
-  neighborMineCount: number = 0;
+  @Input() id: string;
+  @Input() opened: boolean = false;
+  @Input() flagged: boolean = false;
+  @Input() mined: boolean = false;
+  @Input() neighborMineCount: number = 0;
+
+  @Output() openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() openNeighbors: EventEmitter<string> = new EventEmitter<string>();
 
   status: StatusType;
-
-  @Output()
-  openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output()
-  flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output()
-  openNeighbors: EventEmitter<string> = new EventEmitter<string>();
 
   get cellText() {
     if (this.flagged) {
