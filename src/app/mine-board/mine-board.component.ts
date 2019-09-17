@@ -20,6 +20,8 @@ export class MineBoardComponent implements OnInit {
 
   @Output() flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  gameWasVictoryTime: number = 0;
+
   flaggedCount: number = 0;
   cellList = [];
   cellListMap = {};
@@ -217,6 +219,7 @@ export class MineBoardComponent implements OnInit {
 
   // 检查是否成功
   gameWasVictory() {
+    this.gameWasVictoryTime++;
     if (this.flaggedCount !== this.mineCount) {
       return;
     }
@@ -226,6 +229,7 @@ export class MineBoardComponent implements OnInit {
       });
     });
     if (gameResult) {
+      console.log(this.gameWasVictoryTime);
       return this.messageService.sendStatus('victory');
     }
   }

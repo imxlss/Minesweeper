@@ -12,7 +12,7 @@ export class MessageService {
     this.status$.next(status);
   }
 
-  getStatus(): Observable<any> {
+  getStatus(): Observable<StatusType> {
     return this.status$.asObservable();
   }
 
