@@ -3,6 +3,6 @@
     <mine-cell class="cell" *ngFor="let cell of rowCellList" (openNeighbors)="openNeighbors($event)"
       (flaggedChange)="flaggedChangeFormCell($event)" (openedChange)="openedChange()" [id]="cell.id"
       [(opened)]="cell.opened" [(flagged)]="cell.flagged" [mined]="cell.mined"
-      [neighborMineCount]="cell.neighborMineCount" [status]="status"></mine-cell>
+      [neighborMineCount]="cell.neighborMineCount"></mine-cell>
   </div>
 </div>

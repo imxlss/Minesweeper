@@ -20,8 +20,7 @@ export class MineCellComponent implements OnInit {
   @Input()
   neighborMineCount: number = 0;
 
-  @Input()
-  status: StatusType = 'ready';
+  status: StatusType;
 
   @Output()
   openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();

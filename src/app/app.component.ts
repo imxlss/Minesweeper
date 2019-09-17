@@ -1,4 +1,4 @@
-import { StatusType, IBoardIInfo } from './core/type';
+import { IBoardIInfo } from './core/type';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   boardSize: number = 10;
   mineCount: number = 10;
-  status: StatusType = 'ready';
 
   showResult = false;
 
@@ -19,10 +18,6 @@ export class AppComponent {
     console.log(boardInfo);
     this.boardSize = boardInfo.boardSize;
     this.mineCount = boardInfo.mineCount;
-  }
-
-  statusChange(status: StatusType) {
-    this.status = status;
   }
 
   flaggedChange(flagged: boolean) {

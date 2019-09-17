@@ -19,8 +19,6 @@ export class MineBoardComponent implements OnInit {
   boardSize: number;
   @Input()
   mineCount: number;
-  @Input()
-  status: StatusType;
 
   @Output()
   flaggedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
