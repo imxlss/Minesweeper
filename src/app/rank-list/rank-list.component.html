@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>名次🍺</th>
+    <th>时长🎏</th>
+    <th>用户💩</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of rankList; index as index">
+      <td class="rank-data rank-index">{{index + 1 | index}}</td>
+      <td class="rank-data">{{item.duration}}</td>
+      <td class="rank-data">{{item.uuid}}</td>
+    </tr>
+  </tbody>
+</table>

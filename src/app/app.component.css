@@ -2,10 +2,16 @@
   display: flex;
   height: 95vh;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .mine-ctrl-wrapper {
   margin: 0 20px;
-  align-self: center;
+  /* align-self: center; */
+}
+
+.rank-list-container {
+  display: flex;
+  margin: 0 20px;
+  /* align-self: center; */
 }

@@ -6,6 +6,8 @@ import { MineCellComponent } from './mine-cell/mine-cell.component';
 import { MineBoardComponent } from './mine-board/mine-board.component';
 import { MineCtrlComponent } from './mine-ctrl/mine-ctrl.component';
 import { MineResultComponent } from './mine-result/mine-result.component';
+import { RankListComponent } from './rank-list/rank-list.component';
+import { IndexPipe } from './pipes/index.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { MineResultComponent } from './mine-result/mine-result.component';
     MineCellComponent,
     MineBoardComponent,
     MineCtrlComponent,
-    MineResultComponent
+    MineResultComponent,
+    RankListComponent,
+    IndexPipe
   ],
   imports: [BrowserModule],
   providers: [],
