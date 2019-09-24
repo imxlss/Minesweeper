@@ -1,3 +1,4 @@
+import { HttpService } from './../service/http.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,24 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rank-list.component.css']
 })
 export class RankListComponent implements OnInit {
-  rankList = [
-    {
-      uuid: 'asdsad',
-      duration: 100,
-    },
-    {
-      uuid: 'asdsad',
-      duration: 101,
-    },
-    {
-      uuid: 'asdsad',
-      duration: 103,
-    }
-  ]
+  rankList = [];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.rankListFor();
+  }
+
+  rankListFor(level = 0) {
+    this.httpService.getRankList({ level }).subscribe(res => {
+      this.rankList = res.result.data;
+    })
   }
 
 }

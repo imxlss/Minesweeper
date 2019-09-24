@@ -8,6 +8,7 @@ import { MineCtrlComponent } from './mine-ctrl/mine-ctrl.component';
 import { MineResultComponent } from './mine-result/mine-result.component';
 import { RankListComponent } from './rank-list/rank-list.component';
 import { IndexPipe } from './pipes/index.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { IndexPipe } from './pipes/index.pipe';
     RankListComponent,
     IndexPipe
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

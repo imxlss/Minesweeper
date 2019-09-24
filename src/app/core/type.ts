@@ -14,3 +14,12 @@ export interface ICell {
   neighborMineCount: number;
   opened: boolean;
 }
+
+export interface IRankList {
+  level: number;
+}
+
+export interface IHttpResponse {
+  status: string | number;
+  result: any
+}
