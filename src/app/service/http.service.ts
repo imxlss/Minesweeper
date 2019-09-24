@@ -2,8 +2,8 @@ import { IRankList, IHttpResponse } from './../core/type';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const PERFIX = `http://localhost:8080`;
 const APPEND_SCORE_API = `/api/append_score`;
 const RANK_LIST_API = `/api/ranking_list`;
 
@@ -23,7 +23,7 @@ export class HttpService {
       .append(`level`, `${params.level}`);
 
     return this.http.get<IHttpResponse>(
-      PERFIX + RANK_LIST_API, { params: query }
+      environment.prefix + RANK_LIST_API, { params: query }
     ) as Observable<IHttpResponse>;
   }
 
