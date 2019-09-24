@@ -1,3 +1,5 @@
+import { MessageService } from './../service/message.service';
+import { LevelType, levelMap } from './../core/type';
 import { HttpService } from './../service/http.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,15 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RankListComponent implements OnInit {
   rankList = [];
+  levelNumber: number;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.rankListFor();
+    this.messageService.getLevel().subscribe(level => {
+      this.levelNumber = levelMap[level];
+      this.rankListFor();
+    })
   }
 
-  rankListFor(level = 0) {
-    this.httpService.getRankList({ level }).subscribe(res => {
+  rankListFor() {
+    this.httpService.getRankList({ level: this.levelNumber }).subscribe(res => {
       this.rankList = res.result.data;
     })
   }

@@ -123,7 +123,7 @@ export class MineCtrlComponent implements OnInit {
 
   changeLevel(level: LevelType) {
     this.level = level;
-
+    this.messageService.sendLevel(this.level);
     this.levelChange.emit(MineCountLevel[this.level]);
   }
 
