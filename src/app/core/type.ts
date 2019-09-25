@@ -21,6 +21,12 @@ export interface ICell {
   opened: boolean;
 }
 
+export interface IAppendScore {
+  level: number;
+  uuid: string;
+  duration: number;
+}
+
 export interface IRankList {
   level: number;
 }
