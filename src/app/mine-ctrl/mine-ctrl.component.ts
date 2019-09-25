@@ -1,6 +1,7 @@
+import { HttpService } from './../service/http.service';
 import { MessageService } from './../service/message.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { LevelType, StatusType } from '../core/type';
+import { LevelType, StatusType, levelMap } from '../core/type';
 import { UtilsService } from '../service/utils.service';
 
 const MineCountLevel = {
@@ -44,7 +45,8 @@ export class MineCtrlComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private httpService: HttpService
   ) {
     this.changeLevel = this.utilsService.before(
       this.changeLevel,
@@ -60,6 +62,9 @@ export class MineCtrlComponent implements OnInit {
       }
       if (['loss', 'victory'].includes(status)) {
         this.pauseTimer();
+        if (status === 'victory') {
+          this.appendScore();
+        }
       }
     });
   }
@@ -123,11 +128,21 @@ export class MineCtrlComponent implements OnInit {
 
   changeLevel(level: LevelType) {
     this.level = level;
-
+    this.messageService.sendLevel(this.level);
     this.levelChange.emit(MineCountLevel[this.level]);
   }
 
   canChangeLevel(): boolean {
     return this.status === 'ready';
+  }
+
+  appendScore() {
+    this.httpService.appendScore({
+      level: levelMap[this.level],
+      duration: this.time,
+      uuid: this.utilsService.getUUID()
+    }).subscribe(res => {
+      console.log(res);
+    })
   }
 }
