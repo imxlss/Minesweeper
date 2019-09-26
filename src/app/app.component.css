@@ -10,7 +10,13 @@
   /* align-self: center; */
 }
 
-.rank-list-container {
+.mine-board-warpper {
+  width: 750px;
+  display: flex;
+  justify-content: center;
+}
+
+.rank-list-wrapper {
   display: flex;
   margin: 0 20px;
   /* align-self: center; */
