@@ -10,9 +10,10 @@ thead th {
   min-width: 6em;
 }
 
-tbody tr td {
+td {
   line-height: 2em;
-  width: 6em;
+  min-width: 6em;
+  font-weight: lighter;
 }
 
 .rank-data {
@@ -22,4 +23,12 @@ tbody tr td {
 
 .rank-index {
   color: #128296;
+}
+
+.rank-user {
+  width: 10em;
+}
+
+.my-rank {
+  font-weight: normal;
 }
