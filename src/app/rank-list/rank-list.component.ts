@@ -18,10 +18,16 @@ export class RankListComponent implements OnInit {
 
   ngOnInit() {
     this.getUUID();
-    
+
     this.messageService.getLevel().subscribe(level => {
       this.levelNumber = levelMap[level];
       this.rankListFor();
+    })
+
+    this.messageService.refreshRankList$.subscribe(res => {
+      if (res === true) {
+        this.rankListFor();
+      }
     })
   }
 
