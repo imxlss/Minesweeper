@@ -142,7 +142,9 @@ export class MineCtrlComponent implements OnInit {
       duration: this.time,
       uuid: this.utilsService.getUUID()
     }).subscribe(res => {
-      console.log(res);
+      if (res.result === true) {
+        this.messageService.refreshRankList$.next(true);
+      }
     })
   }
 }

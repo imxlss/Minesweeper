@@ -1,11 +1,12 @@
 import { StatusType, LevelType } from './../core/type';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  refreshRankList$ = new Subject<boolean>();
   private status$ = new BehaviorSubject<StatusType>('ready');
 
   sendStatus(status: StatusType) {
