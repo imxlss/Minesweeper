@@ -1,0 +1,19 @@
+header {
+  background: rebeccapurple;
+  margin-bottom: 2.45rem;
+}
+
+div {
+  margin: 0px auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+}
+
+h1 {
+  margin: 0px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}

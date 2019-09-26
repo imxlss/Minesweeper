@@ -1,11 +1,15 @@
+<app-header></app-header>
+
 <div class="container">
   <div class="mine-ctrl-wrapper">
     <mine-ctrl [(flaggedCount)]="flaggedCount" (levelChange)="levelChange($event)">
     </mine-ctrl>
   </div>
-  <mine-board [boardSize]="boardSize" [mineCount]="mineCount" (flaggedChange)="flaggedChange($event)">
-  </mine-board>
-  <div class="rank-list-container">
+  <div class="mine-board-warpper">
+    <mine-board [boardSize]="boardSize" [mineCount]="mineCount" (flaggedChange)="flaggedChange($event)">
+    </mine-board>
+  </div>
+  <div class="rank-list-wrapper">
     <rank-list></rank-list>
   </div>
 </div>

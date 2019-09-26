@@ -9,6 +9,7 @@ import { MineResultComponent } from './mine-result/mine-result.component';
 import { RankListComponent } from './rank-list/rank-list.component';
 import { IndexPipe } from './pipes/index.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     MineCtrlComponent,
     MineResultComponent,
     RankListComponent,
-    IndexPipe
+    IndexPipe,
+    HeaderComponent
   ],
   imports: [BrowserModule, HttpClientModule],
   providers: [],
