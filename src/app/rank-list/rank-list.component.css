@@ -10,9 +10,12 @@ thead th {
   min-width: 6em;
 }
 
+thead th:last-child {
+  width: 10em;
+}
+
 td {
   line-height: 2em;
-  min-width: 6em;
   font-weight: lighter;
 }
 
@@ -23,10 +26,6 @@ td {
 
 .rank-index {
   color: #128296;
-}
-
-.rank-user {
-  width: 10em;
 }
 
 .my-rank {
