@@ -1,10 +1,6 @@
+import { gameResultMap } from './../core/type';
 import { MessageService } from './../service/message.service';
 import { Component, OnInit } from '@angular/core';
-
-const resultMap = {
-  loss: '失败了！继续努力吧笨蛋~',
-  victory: '恭喜你，取得了游戏的胜利！'
-};
 
 @Component({
   selector: 'mine-result',
@@ -21,7 +17,7 @@ export class MineResultComponent implements OnInit {
     this.messageService.getStatus().subscribe(status => {
       if (['loss', 'victory'].includes(status)) {
         this.showResult = true;
-        this.resultText = resultMap[status];
+        this.resultText = gameResultMap[status];
       } else {
         this.showResult = false;
       }

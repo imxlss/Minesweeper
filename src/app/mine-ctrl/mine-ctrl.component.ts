@@ -1,23 +1,9 @@
+import { mineCountLevel } from './../core/type';
 import { HttpService } from './../service/http.service';
 import { MessageService } from './../service/message.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { LevelType, StatusType, levelMap } from '../core/type';
 import { UtilsService } from '../service/utils.service';
-
-const MineCountLevel = {
-  easy: {
-    boardSize: 10,
-    mineCount: 10
-  },
-  medium: {
-    boardSize: 16,
-    mineCount: 32
-  },
-  hard: {
-    boardSize: 22,
-    mineCount: 50
-  }
-};
 
 @Component({
   selector: 'mine-ctrl',
@@ -40,7 +26,7 @@ export class MineCtrlComponent implements OnInit {
   private _timer = null;
 
   get mineCount(): number {
-    return MineCountLevel[this.level].mineCount;
+    return mineCountLevel[this.level].mineCount;
   }
 
   constructor(
@@ -129,7 +115,7 @@ export class MineCtrlComponent implements OnInit {
   changeLevel(level: LevelType) {
     this.level = level;
     this.messageService.sendLevel(this.level);
-    this.levelChange.emit(MineCountLevel[this.level]);
+    this.levelChange.emit(mineCountLevel[this.level]);
   }
 
   canChangeLevel(): boolean {
