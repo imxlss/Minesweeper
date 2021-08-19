@@ -1,6 +1,6 @@
 import { UtilsService } from './../service/utils.service';
 import { MessageService } from './../service/message.service';
-import { LevelType, levelMap } from './../core/type';
+import { levelMap } from './../core/type';
 import { HttpService } from './../service/http.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -21,12 +21,12 @@ export class RankListComponent implements OnInit {
 
     this.messageService.getLevel().subscribe(level => {
       this.levelNumber = levelMap[level];
-      this.rankListFor();
+      this.getRankList();
     })
 
     this.messageService.refreshRankList$.subscribe(res => {
       if (res === true) {
-        this.rankListFor();
+        this.getRankList();
       }
     })
   }
@@ -35,7 +35,7 @@ export class RankListComponent implements OnInit {
     this.uuid = this.utilsService.getUUID();
   }
 
-  rankListFor() {
+  getRankList() {
     this.httpService.getRankList({ level: this.levelNumber }).subscribe(res => {
       this.rankList = res.result.data;
     })

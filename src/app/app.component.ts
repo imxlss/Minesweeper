@@ -15,7 +15,6 @@ export class AppComponent {
   flaggedCount: number = 0;
 
   levelChange(boardInfo: IBoardIInfo) {
-    console.log(boardInfo);
     this.boardSize = boardInfo.boardSize;
     this.mineCount = boardInfo.mineCount;
   }
