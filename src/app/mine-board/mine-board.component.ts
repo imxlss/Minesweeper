@@ -26,9 +26,12 @@ export class MineBoardComponent implements OnInit, OnChanges {
   flaggedCount: number = 0;
   cellList = [];
   cellListMap = {};
-  boardStyle = {
-    width: `calc(${this.boardSize * 2}em + ${this.boardSize}px)`
-  };
+  
+  get boardStyle() {
+    return {
+      width: `calc(${this.boardSize * 2}em + ${this.boardSize}px)`,
+    };
+  }
 
   constructor(private messageService: MessageService) { }
 
