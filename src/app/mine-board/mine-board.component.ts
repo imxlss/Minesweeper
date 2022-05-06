@@ -161,8 +161,8 @@ export class MineBoardComponent implements OnInit, OnChanges {
   }
 
   openNeighbors(id: string) {
-    let notOpendNeighborsList = this.getNotOpenedNeighbors(id);
-    this.openCells(notOpendNeighborsList);
+    const notOpenedNeighborsList = this.getNotOpenedNeighbors(id);
+    this.openCells(notOpenedNeighborsList);
     return setTimeout(() => {
       this.gameWasVictory()
     }, 0);
@@ -196,7 +196,7 @@ export class MineBoardComponent implements OnInit, OnChanges {
   showAllMine() {
     for (let i = 0; i < this.boardSize; i++) {
       for (let j = 0; j < this.boardSize; j++) {
-        this.cellList[i][j].opend = true;
+        this.cellList[i][j].opened = true;
       }
     }
   }
