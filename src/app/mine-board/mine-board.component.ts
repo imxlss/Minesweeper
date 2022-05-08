@@ -77,19 +77,19 @@ export class MineBoardComponent implements OnInit, OnChanges {
 
   // 随机放置地雷
   randomlyAssignMines() {
-    let mineCooridinates = [];
+    const mineCoordinates = [];
 
     for (let i = 0; i < this.mineCount; i++) {
       let randomRowCoordinate = this.getRandomInteger(0, this.boardSize);
       let randomColumnCoordinate = this.getRandomInteger(0, this.boardSize);
       let cellId = `${randomRowCoordinate}|${randomColumnCoordinate}`;
 
-      while (mineCooridinates.includes(cellId)) {
+      while (mineCoordinates.includes(cellId)) {
         randomRowCoordinate = this.getRandomInteger(0, this.boardSize);
         randomColumnCoordinate = this.getRandomInteger(0, this.boardSize);
         cellId = `${randomRowCoordinate}|${randomColumnCoordinate}`;
       }
-      mineCooridinates.push(cellId);
+      mineCoordinates.push(cellId);
       this.cellList[randomRowCoordinate][randomColumnCoordinate].mined = true;
     }
   }
